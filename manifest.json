@@ -1,10 +1,10 @@
 {
     "id": "dc80363b-2628-4949-a0db-7ca8c999db9a",
     "authors": [
-        "OverSpect - Made with AMP Config Generator"
+        "OverSpect"
     ],
-    "origin": "https://github.com/OverSpect - Made with AMP Config Generator/AMPTemplates.git",
-    "url": "https://github.com/OverSpect - Made with AMP Config Generator/AMPTemplates",
+    "origin": "https://github.com/ngoodey1/AMPTemplates.git",
+    "url": "https://github.com/ngoodey1/AMPTemplates",
     "imagefile": "",
-    "prefix": "OverSpect - Made with AMP Config Generator"
+    "prefix": "OverSpect"
 }
