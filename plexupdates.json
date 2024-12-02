@@ -10,7 +10,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/dpkg",
-        "UpdateSourceArgs": "-i \"cd plex && wget -qO plex.deb https://downloads.plex.tv/plex-media-server-new/1.41.2.9200-c6bbc1b53/debian/plexmediaserver_1.41.2.9200-c6bbc1b53_amd64.deb"",
+        "UpdateSourceArgs": "-i \" && wget https://downloads.plex.tv/plex-media-server-new/1.41.2.9200-c6bbc1b53/debian/plexmediaserver_1.41.2.9200-c6bbc1b53_amd64.deb"",
         "UpdateSourceArch": "x86_64",
         "SkipOnFailure": false
     },
