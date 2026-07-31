@@ -1,0 +1,123 @@
+[
+    {
+        "DisplayName": "OSM PBF Download URL",
+        "Category": "OSRM:map",
+        "Subcategory": "Map Data:download",
+        "Description": "Direct URL to a .osm.pbf extract, such as a Geofabrik state or region download.",
+        "Keywords": "map,osm,pbf,geofabrik,url",
+        "FieldName": "PbfUrl",
+        "InputType": "text",
+        "ParamFieldName": "PbfUrl",
+        "DefaultValue": "https://download.geofabrik.de/north-america/us/michigan-latest.osm.pbf",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Dataset Name",
+        "Category": "OSRM:map",
+        "Subcategory": "Map Data:storage",
+        "Description": "Filename without .osm.pbf or .osrm. Use lowercase letters, numbers and hyphens only.",
+        "Keywords": "dataset,filename,map",
+        "FieldName": "DatasetName",
+        "InputType": "text",
+        "ParamFieldName": "DatasetName",
+        "DefaultValue": "michigan-latest",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Routing Profile",
+        "Category": "OSRM:map",
+        "Subcategory": "Processing:settings",
+        "Description": "OSRM Lua profile used when extracting the map.",
+        "Keywords": "car,bicycle,foot,profile",
+        "FieldName": "Profile",
+        "InputType": "enum",
+        "ParamFieldName": "Profile",
+        "DefaultValue": "car",
+        "EnumValues": {
+            "car": "Car",
+            "bicycle": "Bicycle",
+            "foot": "Foot"
+        }
+    },
+    {
+        "DisplayName": "Routing Algorithm",
+        "Category": "OSRM:map",
+        "Subcategory": "Processing:settings",
+        "Description": "MLD is recommended and supports faster re-customization.",
+        "Keywords": "mld,ch,algorithm",
+        "FieldName": "Algorithm",
+        "InputType": "enum",
+        "ParamFieldName": "Algorithm",
+        "DefaultValue": "mld",
+        "EnumValues": {
+            "mld": "MLD",
+            "ch": "CH"
+        }
+    },
+    {
+        "DisplayName": "Force Map Rebuild",
+        "Category": "OSRM:map",
+        "Subcategory": "Processing:settings",
+        "Description": "When enabled, Update deletes the processed dataset and rebuilds it from the PBF.",
+        "Keywords": "force,rebuild,update,map",
+        "FieldName": "ForceRebuild",
+        "InputType": "checkbox",
+        "ParamFieldName": "ForceRebuild",
+        "DefaultValue": "false",
+        "EnumValues": {
+            "False": "false",
+            "True": "true"
+        }
+    },
+    {
+        "DisplayName": "Max Table Size",
+        "Category": "OSRM:settings",
+        "Subcategory": "API Limits:gauge",
+        "Description": "Maximum number of coordinates accepted by the table service.",
+        "Keywords": "table,limit,coordinates",
+        "FieldName": "MaxTableSize",
+        "InputType": "number",
+        "ParamFieldName": "MaxTableSize",
+        "DefaultValue": "100",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Max Matching Size",
+        "Category": "OSRM:settings",
+        "Subcategory": "API Limits:gauge",
+        "Description": "Maximum number of coordinates accepted by the match service.",
+        "Keywords": "matching,limit,coordinates",
+        "FieldName": "MaxMatchingSize",
+        "InputType": "number",
+        "ParamFieldName": "MaxMatchingSize",
+        "DefaultValue": "100",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Use Shared Memory",
+        "Category": "OSRM:settings",
+        "Subcategory": "Runtime:memory",
+        "Description": "Normally leave disabled for a single AMP-managed OSRM process.",
+        "Keywords": "shared,memory,datastore",
+        "FieldName": "SharedMemoryFlag",
+        "InputType": "enum",
+        "ParamFieldName": "SharedMemoryFlag",
+        "DefaultValue": "",
+        "EnumValues": {
+            "": "Disabled",
+            "--shared-memory": "Enabled"
+        }
+    },
+    {
+        "DisplayName": "Custom Startup Arguments",
+        "Category": "OSRM:settings",
+        "Subcategory": "Runtime:terminal",
+        "Description": "Additional osrm-routed command-line arguments.",
+        "Keywords": "custom,arguments,startup",
+        "FieldName": "CustomArguments",
+        "InputType": "text",
+        "ParamFieldName": "CustomArguments",
+        "DefaultValue": "",
+        "EnumValues": {}
+    }
+]

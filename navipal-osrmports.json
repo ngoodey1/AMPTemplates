@@ -1,0 +1,9 @@
+[
+    {
+        "Protocol": "TCP",
+        "Port": "5000",
+        "Name": "OSRM HTTP API",
+        "Description": "OSRM routing API port",
+        "Ref": "ApplicationPort1"
+    }
+]

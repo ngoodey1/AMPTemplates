@@ -1,0 +1,56 @@
+[
+    {
+        "UpdateStageName": "Create OSRM Data Directory",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "CreateDirectory",
+        "UpdateSourceArgs": "{{$FullBaseDir}}"
+    },
+    {
+        "UpdateStageName": "Validate Dataset Name",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-lc \"case '{{DatasetName}}' in (*[!a-zA-Z0-9._-]*|'') echo 'Invalid DatasetName'; exit 2;; esac\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Remove Dataset For Forced Rebuild",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-lc \"if [ '{{ForceRebuild}}' = 'true' ] || [ '{{ForceRebuild}}' = 'True' ]; then rm -f '{{$FullBaseDir}}{{DatasetName}}.osm.pbf' '{{$FullBaseDir}}{{DatasetName}}.osrm'*; fi\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Download OpenStreetMap Extract",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-lc \"set -e; cd '{{$FullBaseDir}}'; if [ ! -s '{{DatasetName}}.osm.pbf' ]; then curl -fL --retry 5 --retry-delay 5 -o '{{DatasetName}}.osm.pbf.part' '{{PbfUrl}}'; mv '{{DatasetName}}.osm.pbf.part' '{{DatasetName}}.osm.pbf'; else echo 'PBF already present; skipping download.'; fi\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Extract OSRM Network",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-lc \"set -e; cd '{{$FullBaseDir}}'; if [ ! -s '{{DatasetName}}.osrm' ]; then /opt/osrm/bin/osrm-extract -p '/opt/osrm/share/osrm/profiles/{{Profile}}.lua' '{{DatasetName}}.osm.pbf'; else echo 'Extracted dataset already present; skipping extract.'; fi\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Prepare MLD Dataset",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-lc \"set -e; cd '{{$FullBaseDir}}'; if [ '{{Algorithm}}' = 'mld' ]; then /opt/osrm/bin/osrm-partition '{{DatasetName}}.osrm'; /opt/osrm/bin/osrm-customize '{{DatasetName}}.osrm'; else echo 'MLD preparation skipped.'; fi\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Prepare CH Dataset",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-lc \"set -e; cd '{{$FullBaseDir}}'; if [ '{{Algorithm}}' = 'ch' ]; then /opt/osrm/bin/osrm-contract '{{DatasetName}}.osrm'; else echo 'CH preparation skipped.'; fi\"",
+        "SkipOnFailure": false
+    }
+]
